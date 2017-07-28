@@ -1,7 +1,11 @@
 <egypt>
 
   <header>
-    <h1>EGYPT</h1>
+    <h1>EGYPT
+      <small>version: 0.0.2 (2017-07-28)
+        <a href="https://github.com/Kazunori-Kimura/egypt-app"><i class="fa fa-github" aria-hidden="true"></i>ソースコード</a>
+      </small>
+    </h1>
   </header>
   <div id="controller">
     <button class="btn btn-default" onclick={ reset }>
@@ -11,28 +15,32 @@
   </div>
   <game-board></game-board>
   <game-status></game-status>
-  <footer>version: 0.0.1 (2017-07-14)</footer>
 
   <style>
     egypt {
-      width: 100%;
+      width: 100vw;
       min-height: 100vh;
+
       display: grid;
-      grid-template-rows: 80px 1fr 40px;
+      grid-template-rows: 80px 80px 1fr;
       grid-template-columns: 2fr 1fr;
       grid-template-areas:
-        "header controller"
-        "board status"
-        "footer footer";
+        "header header"
+        "board controller"
+        "board status";
     }
     header {
       grid-area: header;
       padding: 5px 20px;
     }
+    h1 small {
+      font-size: 0.7em;
+      font-weight: normal;
+      color: #999;
+      margin-left: 40px;
+    }
     #controller {
       grid-area: controller;
-      display: flex;
-      align-items: center;
     }
     game-board {
       grid-area: board;
@@ -40,20 +48,15 @@
     game-status {
       grid-area: status;
     }
-    footer {
-      grid-area: footer;
-      padding: 5px 20px;
-    }
-    @media screen and (max-width: 800px) {
+    @media screen and (orientation: portrait) {
       egypt {
         grid-template-columns: 1fr;
-        grid-template-rows: 60px 30px 1fr 60px 60px;
+        grid-template-rows: 80px 80px 1fr 120px;
         grid-template-areas:
           "header"
           "controller"
           "board"
-          "status"
-          "footer";
+          "status";
       }
     }
   </style>
@@ -119,48 +122,42 @@
 </egypt>
 
 <game-board>
-  <div id="wrapper">
-    <div id="content">
-      <virtual each={ row, rowIndex in data }>
-        <div 
-          each={ item, colIndex in row }
-          class={
-            "panel": true,
-            "erase": isErase(rowIndex, colIndex)
-          }
-          onclick={ parent.clickPanel }
-          data-row-index={rowIndex}
-          data-col-index={colIndex}>
-          <span if={ item != "0" }>
-            <i class="{ parent.getIcon(item) }"></i>
-          </span>
-        </div>
-      </virtual>
-    </div>
+  <div id="content">
+    <virtual each={ row, rowIndex in data }>
+      <div 
+        each={ item, colIndex in row }
+        class={
+          "panel": true,
+          "erase": isErase(rowIndex, colIndex)
+        }
+        onclick={ parent.clickPanel }
+        data-row-index={rowIndex}
+        data-col-index={colIndex}>
+        <span if={ item != "0" }>
+          <i class="{ parent.getIcon(item) }"></i>
+        </span>
+      </div>
+    </virtual>
   </div>
 
-  <style>
-    #wrapper {
-      position: relative;
-      width: calc(100% - 20px);
-      margin-left: 10px;
-    }
-    #wrapper:before {
-      content: "";
-      display: block;
-      padding-top: 100%;
-    }
-    #content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
 
+  <style>
+    #content {
+      margin-left: 20px;
       border: 1px solid #999;
       display: flex;
       flex-wrap: wrap;
+
+      width: calc(100vh - 100px);
+      height: calc(100vh - 100px);
     }
+    @media screen and (orientation: portrait) {
+      #content {
+        width: calc(100vh - 280px);
+        height: calc(100vh - 280px);
+      }
+    }
+
     .panel {
       width: calc(100%/8 - 2px);
       height: calc(100%/8 - 2px);

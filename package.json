@@ -15,7 +15,10 @@
     "start": "npm-run-all -p watch server",
     "watch": "chokidar \"src/**/*\" -i \"src/tags/index.js\" -c \"npm run build\""
   },
-  "keywords": ["game", "egypt"],
+  "keywords": [
+    "game",
+    "egypt"
+  ],
   "author": "kazunori.kimura.js@gmail.com",
   "license": "MIT",
   "devDependencies": {
@@ -23,7 +26,7 @@
     "babel-preset-es2016": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.18.12",
+    "browser-sync": "^2.18.13",
     "browserify": "^14.4.0",
     "chokidar-cli": "^1.2.0",
     "npm-run-all": "^4.0.2",

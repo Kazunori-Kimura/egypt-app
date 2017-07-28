@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html,body {
+      margin: 0;
+      padding: 0;
+    }
+    #wrapper {
+      margin: 0 10px;
+      width: calc(100vw - 20px);
+      height: 100vh;
+
+      display: grid;
+      grid-template-rows: 80px 1fr 1fr;
+      grid-template-columns: 2fr 1fr;
+      grid-template-areas:
+        "header header"
+        "content controller"
+        "content status";
+    }
+    header {
+      grid-area: header;
+    }
+    #content {
+      grid-area: content;
+    }
+    #controller {
+      grid-area: controller;
+    }
+    #status {
+      grid-area: status;
+    }
+    #game-board {
+      background-color: #ccc;
+
+      width: calc(100vh - 90px);
+      height: calc(100vh - 90px);
+    }
+    @media screen and (orientation: portrait) {
+      /* 縦向き */
+      #wrapper {
+        grid-template-rows: 80px 80px 1fr 120px;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "controller"
+          "content"
+          "status";
+      }
+      #game-board {
+        width: calc(100vh - 280px);
+        height: calc(100vh - 280px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <header><h1>test</h1></header>
+    <div id="content">
+      <div id="game-board"></div>
+    </div>
+    <div id="controller"><h2>controller</h2></div>
+    <div id="status"><h2>status</h2></div>
+  </div>
+</body>
+</html>
