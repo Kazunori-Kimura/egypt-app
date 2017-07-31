@@ -2991,7 +2991,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     tagger(window.riot);
   }
 })(function (riot, require, exports, module) {
-  riot.tag2('egypt', '<header> <h1>EGYPT <small>version: 0.0.2 (2017-07-28) <a href="https://github.com/Kazunori-Kimura/egypt-app"><i class="fa fa-github" aria-hidden="true"></i>ソースコード</a> </small> </h1> </header> <div id="controller"> <button class="btn btn-default" onclick="{reset}"> <i class="fa fa-repeat"></i> ギブアップ </button> </div> <game-board></game-board> <game-status></game-status>', 'egypt { width: 100vw; min-height: 100vh; display: grid; grid-template-rows: 80px 80px 1fr; grid-template-columns: 2fr 1fr; grid-template-areas: "header header" "board controller" "board status"; } egypt header,[data-is="egypt"] header{ grid-area: header; padding: 5px 20px; } egypt h1 small,[data-is="egypt"] h1 small{ font-size: 0.7em; font-weight: normal; color: #999; margin-left: 40px; } egypt #controller,[data-is="egypt"] #controller{ grid-area: controller; } egypt game-board,[data-is="egypt"] game-board{ grid-area: board; } egypt game-status,[data-is="egypt"] game-status{ grid-area: status; } @media screen and (orientation: portrait) { egypt { grid-template-columns: 1fr; grid-template-rows: 80px 80px 1fr 120px; grid-template-areas: "header" "controller" "board" "status"; } }', '', function (opts) {
+  riot.tag2('egypt', '<header> <h1>EGYPT <small>version: 0.0.3 (2017-07-31) <a href="https://github.com/Kazunori-Kimura/egypt-app"><i class="fa fa-github" aria-hidden="true"></i>ソースコード</a> </small> </h1> </header> <div id="controller"> <button class="btn btn-default" onclick="{reset}"> <i class="fa fa-repeat"></i> ギブアップ </button> </div> <game-board></game-board> <game-status></game-status>', 'egypt { width: 100vw; min-height: 100vh; display: grid; grid-template-rows: 80px 80px 1fr; grid-template-columns: 2fr 1fr; grid-template-areas: "header header" "board controller" "board status"; } egypt header,[data-is="egypt"] header{ grid-area: header; padding: 5px 20px; } egypt h1 small,[data-is="egypt"] h1 small{ font-size: 0.7em; font-weight: normal; color: #999; margin-left: 40px; } egypt #controller,[data-is="egypt"] #controller{ grid-area: controller; } egypt game-board,[data-is="egypt"] game-board{ grid-area: board; } egypt game-status,[data-is="egypt"] game-status{ grid-area: status; } @media screen and (orientation: portrait) { egypt { grid-template-columns: 1fr; grid-template-rows: 80px 80px 1fr 120px; grid-template-areas: "header" "controller" "board" "status"; } }', '', function (opts) {
     var _this = this;
 
     var Picture = require("../lib/picture");
@@ -3041,7 +3041,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     }.bind(this);
   });
 
-  riot.tag2('game-board', '<div id="content"> <virtual each="{row, rowIndex in data}"> <div each="{item, colIndex in row}" class="{⁗panel⁗: true,           ⁗erase⁗: isErase(rowIndex, colIndex)}" onclick="{parent.clickPanel}" data-row-index="{rowIndex}" data-col-index="{colIndex}"> <span if="{item != ⁗0⁗}"> <i class="{parent.getIcon(item)}"></i> </span> </div> </virtual> </div>', 'game-board #content,[data-is="game-board"] #content{ margin-left: 20px; border: 1px solid #999; display: flex; flex-wrap: wrap; width: calc(100vh - 100px); height: calc(100vh - 100px); } @media screen and (orientation: portrait) { game-board #content,[data-is="game-board"] #content{ width: calc(100vh - 280px); height: calc(100vh - 280px); } } game-board .panel,[data-is="game-board"] .panel{ width: calc(100%/8 - 2px); height: calc(100%/8 - 2px); text-align: center; border: 1px solid #ccc; display: flex; justify-content: center; align-items: center; } @keyframes erase { 0% { background: #fff; } 50% { background: yellow; } 100% { background: #fff; } } game-board .erase,[data-is="game-board"] .erase{ animation: erase 0.5s ease 0s infinite; }', '', function (opts) {
+  riot.tag2('game-board', '<div id="content"> <virtual each="{row, rowIndex in data}"> <div each="{item, colIndex in row}" class="{⁗panel⁗: true,           ⁗erase⁗: isErase(rowIndex, colIndex)}" onclick="{parent.clickPanel}" data-row-index="{rowIndex}" data-col-index="{colIndex}"> <span if="{item != ⁗0⁗}"> <i class="{parent.getIcon(item)}"></i> </span> </div> </virtual> </div> <div id="clear" if="{isCleared}"> <h2>{title}</h2> <p>{message}</p> </div>', 'game-board { position: relative; } game-board #content,[data-is="game-board"] #content{ margin-left: 20px; border: 1px solid #999; display: flex; flex-wrap: wrap; width: calc(100vh - 100px); height: calc(100vh - 100px); } game-board #clear,[data-is="game-board"] #clear{ position: absolute; top: 0px; left: 20px; padding: 40px 60px; font-size: 2em; background-color: rgba(255, 255, 255, 0.7); width: calc(100vh - 220px); height: calc(100vh - 180px); } @media screen and (orientation: portrait) { game-board #content,[data-is="game-board"] #content{ width: calc(100vh - 280px); height: calc(100vh - 280px); } game-board #clear,[data-is="game-board"] #clear{ width: calc(100vh - 400px); height: calc(100vh - 360px); } } game-board .panel,[data-is="game-board"] .panel{ width: calc(100%/8 - 2px); height: calc(100%/8 - 2px); text-align: center; border: 1px solid #ccc; display: flex; justify-content: center; align-items: center; } @keyframes erase { 0% { background: #fff; } 50% { background: yellow; } 100% { background: #fff; } } game-board .erase,[data-is="game-board"] .erase{ animation: erase 0.5s ease 0s infinite; }', '', function (opts) {
     var _this5 = this;
 
     var DIRECTION = {
@@ -3057,6 +3057,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     this.erasePanels = new Set();
 
     this.isControllable = true;
+
+    this.isCleared = false;
+    this.title = "CLEAR!!";
+    this.message = "click to go to next stage...";
 
     this.clickPanel = function (e) {
       if (!this.isControllable) {
@@ -3235,6 +3239,13 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
       _this5.update();
     });
+
+    this.observer.on("stage-clear", function () {
+
+      _this5.isCleared = true;
+
+      _this5.update();
+    });
   });
 
   riot.tag2('game-status', '<h2>Status</h2> <virtual each="{item in status}"> <p><i class="{parent.getIcon(item.key)}"></i> : {item.count}</p> </virtual>', '', '', function (opts) {
@@ -3268,8 +3279,13 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       });
 
       _this6.status = ret;
+      if (ret.length > 0) {
 
-      _this6.observer.trigger("status-updated");
+        _this6.observer.trigger("status-updated");
+      } else {
+
+        _this6.observer.trigger("stage-clear");
+      }
 
       _this6.update();
     });

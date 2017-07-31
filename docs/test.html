@@ -9,6 +9,7 @@
     html,body {
       margin: 0;
       padding: 0;
+      overflow: hidden;
     }
     #wrapper {
       margin: 0 10px;
@@ -28,6 +29,8 @@
     }
     #content {
       grid-area: content;
+
+      position: relative;
     }
     #controller {
       grid-area: controller;
@@ -40,6 +43,15 @@
 
       width: calc(100vh - 90px);
       height: calc(100vh - 90px);
+    }
+    #message {
+      display: none;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      padding: 20px;
+
+      background-color: rgba(255, 192, 96, 0.5);
     }
     @media screen and (orientation: portrait) {
       /* 縦向き */
@@ -57,6 +69,64 @@
         height: calc(100vh - 280px);
       }
     }
+
+    .boingInUp {
+      animation: boingInUp 1s ease 0s;
+    }
+    .boingOutDown {
+      animation: boingOutDown 1s ease 0s;
+    }
+    @keyframes boingInUp {
+      0% {
+        opacity: 0;
+        transform-origin: 50% 0%;
+        transform: perspective(800px) rotateX(-90deg);
+      }
+      
+      50% {
+        opacity: 1;
+        transform-origin: 50% 0%;
+        transform: perspective(800px) rotateX(50deg);
+      }
+
+      100% {
+        opacity: 1;
+        transform-origin: 50% 0%;
+        transform: perspective(800px) rotateX(0deg);
+      }
+    }
+    @keyframes boingOutDown {
+      0% {
+        opacity: 1;
+        transform-origin: 100% 100%;
+        transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+      }
+      
+      20% {
+        opacity: 1;
+        transform-origin: 100% 100%;
+        transform: perspective(800px) rotateX(0deg) rotateY(10deg);
+      }
+      
+      30% {
+        opacity: 1;
+        transform-origin: 0% 100%;
+        transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+      }
+      
+      40% {
+        opacity: 1;
+        transform-origin: 0% 100%;
+        transform: perspective(800px) rotateX(10deg) rotateY(10deg);
+      }
+
+      100% {
+        opacity: 0;
+        transform-origin: 100% 100%;
+        transform: perspective(800px) rotateX(90deg) rotateY(0deg);
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -64,9 +134,40 @@
     <header><h1>test</h1></header>
     <div id="content">
       <div id="game-board"></div>
+      <div id="message">
+        <h1>CLEAR!!</h1>
+        <p>Click to go to next stage...</p>
+      </div>
     </div>
-    <div id="controller"><h2>controller</h2></div>
+    <div id="controller">
+      <h2>controller</h2>
+      <button id="showMessage">show</button>
+    </div>
     <div id="status"><h2>status</h2></div>
   </div>
+
+  <script>
+    var btn = document.getElementById("showMessage");
+    var message = document.getElementById("message");
+    var board = document.getElementById("game-board");
+    btn.addEventListener("click", function() {
+      var width = board.offsetWidth;
+      var height = board.offsetHeight;
+      message.style.width = `${width - 40}px`;
+      message.style.height = `${height - 40}px`;
+      message.style.display = "block";
+      message.classList.add("boingInUp");
+      message.classList.remove("boingOutDown");
+    });
+
+    message.addEventListener("click", function() {
+      message.classList.remove("boingInUp");
+      message.classList.add("boingOutDown");
+      // アニメーションが終わったら要素を消す
+      setTimeout(function() {
+        message.style.display = "none";
+      }, 1000);
+    });
+  </script>
 </body>
 </html>

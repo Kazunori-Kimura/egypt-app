@@ -2,7 +2,7 @@
 
   <header>
     <h1>EGYPT
-      <small>version: 0.0.2 (2017-07-28)
+      <small>version: 0.0.3 (2017-07-31)
         <a href="https://github.com/Kazunori-Kimura/egypt-app"><i class="fa fa-github" aria-hidden="true"></i>ソースコード</a>
       </small>
     </h1>
@@ -139,22 +139,44 @@
       </div>
     </virtual>
   </div>
+  <div id="clear" if={ isCleared }>
+    <h2>{ title }</h2>
+    <p>{ message }</p>
+  </div>
 
 
   <style>
+    game-board {
+      position: relative;
+    }
     #content {
       margin-left: 20px;
       border: 1px solid #999;
       display: flex;
       flex-wrap: wrap;
-
+      
       width: calc(100vh - 100px);
       height: calc(100vh - 100px);
+    }
+    #clear {
+      position: absolute;
+      top: 0px;
+      left: 20px;
+      padding: 40px 60px;
+      font-size: 2em;
+      background-color: rgba(255, 255, 255, 0.7);
+
+      width: calc(100vh - 220px);
+      height: calc(100vh - 180px);
     }
     @media screen and (orientation: portrait) {
       #content {
         width: calc(100vh - 280px);
         height: calc(100vh - 280px);
+      }
+      #clear {
+        width: calc(100vh - 400px);
+        height: calc(100vh - 360px);
       }
     }
 
@@ -181,7 +203,7 @@
   </style>
 
   <script>
-    
+    // 方向
     const DIRECTION = {
       "UP": 0,
       "DOWN": 1,
@@ -197,6 +219,10 @@
 
     // 操作可能かどうか
     this.isControllable = true;
+
+    this.isCleared = false;
+    this.title = "CLEAR!!";
+    this.message = "click to go to next stage...";
 
     /**
      * パネルのクリック
@@ -424,6 +450,16 @@
       this.update();
     });
 
+    /**
+     * ステージクリア
+     */
+    this.observer.on("stage-clear", () => {
+      // フラグを更新
+      this.isCleared = true;
+      // 再描画
+      this.update();
+    });
+
   </script>
 </game-board>
 
@@ -466,8 +502,14 @@
       
       // ステータス更新
       this.status = ret;
-      // 更新完了
-      this.observer.trigger("status-updated");
+      if (ret.length > 0) {
+        // 更新完了
+        this.observer.trigger("status-updated");
+      } else {
+        // ステージクリア
+        this.observer.trigger("stage-clear");
+      }
+
       // 再描画
       this.update();
     });
